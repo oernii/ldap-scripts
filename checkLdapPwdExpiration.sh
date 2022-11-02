@@ -198,7 +198,7 @@ MY_LOG_HEADER="`date +\"%b %e %T\"` `hostname` $0[$$]:"
 MY_GAWK_BIN="/usr/bin/gawk"
 
 # Override defaults with an /etc file
-[[ -f /etc/$0.conf ]] && . /etc/$0.conf
+[[ -f /etc/$(basename "$0").conf ]] && . /etc/$(basename "$0").conf
 
 #====================================================================
 # Functions
