@@ -298,7 +298,7 @@ do
 
 	# Go to next entry if no pwdChangedTime
 	if [ ! "${pwdChangedTime}" ]; then
-		echo "${MY_LOG_HEADER} No password change date for ${login}" >&2
+		#echo "${MY_LOG_HEADER} No password change date for ${login}" >&2
 		continue
 	fi
 
@@ -395,10 +395,12 @@ do
 done < ${result_file}
 
 # Print statistics on STDOUT
-echo "${MY_LOG_HEADER} --- Statistics ---"
-echo "${MY_LOG_HEADER} Users checked: ${nb_users}"
-echo "${MY_LOG_HEADER} Account expired: ${nb_expired_users}"
-echo "${MY_LOG_HEADER} Account in warning: ${nb_warning_users}"
+if [[ ${nb_expired_users} -gt 0 ]]; then
+  echo "${MY_LOG_HEADER} --- Statistics ---"
+  echo "${MY_LOG_HEADER} Users checked: ${nb_users}"
+  echo "${MY_LOG_HEADER} Account expired: ${nb_expired_users}"
+  echo "${MY_LOG_HEADER} Account in warning: ${nb_warning_users}"
+fi
 
 # Delete temporary files
 rm -rf ${tmp_dir}
